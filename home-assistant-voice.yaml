@@ -917,27 +917,25 @@ sensor:
     pin_a: GPIO16
     pin_b: GPIO18
     resolution: 2
-    Fix rotary_encoder script.execute syntax
+    on_clockwise:
+      - lambda: id(dial_touched) = true;
+      - if:
+          condition:
+            binary_sensor.is_off: center_button
+          then:
+            - script.execute: increase_volume_script
+          else:
+            - script.execute: increase_hue_script
 
- on_clockwise:
-  - lambda: id(dial_touched) = true;
-  - if:
-      condition:
-        binary_sensor.is_off: center_button
-      then:
-        - script.execute: increase_volume_script
-      else:
-        - script.execute: increase_hue_script
-
-on_anticlockwise:
-  - lambda: id(dial_touched) = true;
-  - if:
-      condition:
-        binary_sensor.is_off: center_button
-      then:
-        - script.execute: decrease_volume_script
-      else:
-        - script.execute: decrease_hue_script
+    on_anticlockwise:
+      - lambda: id(dial_touched) = true;
+      - if:
+          condition:
+            binary_sensor.is_off: center_button
+          then:
+            - script.execute: decrease_volume_script
+          else:
+            - script.execute: decrease_hue_script
 
 event:
   # Event entity exposed to the user to automate on complex center button presses.
@@ -1687,4 +1685,5 @@ debug:
   update_interval: 5s
 Fix rotary_encoder script.execute syntax
 Fix rotary_encoder script.execute syntax for clockwise and anticlockwise
+Fix rotary encoder script syntax
 
