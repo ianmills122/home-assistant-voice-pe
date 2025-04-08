@@ -919,7 +919,7 @@ sensor:
     resolution: 2
     Fix rotary_encoder script.execute syntax
 
-   on_clockwise:
+ on_clockwise:
   - lambda: id(dial_touched) = true;
   - if:
       condition:
@@ -938,6 +938,7 @@ on_anticlockwise:
         - script.execute: decrease_volume_script
       else:
         - script.execute: decrease_hue_script
+
 event:
   # Event entity exposed to the user to automate on complex center button presses.
   # The simple press is not exposed as it is used to control the device itself.
@@ -1685,3 +1686,5 @@ button:
 debug:
   update_interval: 5s
 Fix rotary_encoder script.execute syntax
+Fix rotary_encoder script.execute syntax for clockwise and anticlockwise
+
