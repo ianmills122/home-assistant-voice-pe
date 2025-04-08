@@ -912,7 +912,6 @@ power_supply:
     pin: GPIO45
 
 sensor:
-  # The dial. Used to control volume and Hue of the LED ring.
   - platform: rotary_encoder
     id: dial
     pin_a: GPIO16
@@ -924,26 +923,18 @@ sensor:
           condition:
             binary_sensor.is_off: center_button
           then:
-            - script.execute:
-                id: control_volume
-                increase_volume: true
+            - script.execute: increase_volume_script
           else:
-            - script.execute:
-                id: control_hue
-                increase_hue: true
+            - script.execute: increase_hue_script
     on_anticlockwise:
       - lambda: id(dial_touched) = true;
       - if:
           condition:
             binary_sensor.is_off: center_button
           then:
-            - script.execute:
-                id: control_volume
-                increase_volume: false
+            - script.execute: decrease_volume_script
           else:
-            - script.execute:
-                id: control_hue
-                increase_hue: false
+            - script.execute: decrease_hue_script
 
 event:
   # Event entity exposed to the user to automate on complex center button presses.
